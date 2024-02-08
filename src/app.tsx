@@ -1,7 +1,10 @@
+import { ChangeEvent, useState } from "react";
+import { toast } from "sonner";
+
+import { Input } from "./components/input";
 import { NewNoteCard } from "./components/new-note-card";
 import { NoteCard } from "./components/note-card";
 import logo from "./assets/logo.svg";
-import { ChangeEvent, useState } from "react";
 
 interface Note {
   id: string;
@@ -41,6 +44,8 @@ export function App() {
     setNotes(noteArray);
 
     localStorage.setItem("notes", JSON.stringify(noteArray));
+
+    toast.error("Note deleted successfully");
   }
 
   function handleSearch(event: ChangeEvent<HTMLInputElement>) {
@@ -54,18 +59,13 @@ export function App() {
 
   return (
     <div className="max-w-6xl mx-auto my-12 space-y-6 px-4">
-      <img src={logo} alt="NLW Expert" />
+      <img src={logo} alt="NLW Expert" className="mx-auto" />
 
       <form className="w-full">
-        <input
-          type="text"
-          placeholder="Busque em suas notas..."
-          onChange={handleSearch}
-          className="w-full bg-transparent text-3xl font-semibold tracking-tight outline-none placeholder:text-slate-50"
-        />
+        <Input onChange={handleSearch} />
       </form>
 
-      <div className="h-px bg-zinc-700" />
+      <div className="h-px bg-gray" />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 auto-rows-[250px] gap-6">
         <NewNoteCard onNoteCreated={onNoteCreated} />

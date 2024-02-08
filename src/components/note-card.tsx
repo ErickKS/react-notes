@@ -1,7 +1,8 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { formatDistanceToNow } from "date-fns";
-import { ptBR } from "date-fns/locale";
+import { enUS } from "date-fns/locale";
 import { X } from "lucide-react";
+import clsx from "clsx";
 
 interface NoteCardProps {
   note: {
@@ -13,38 +14,47 @@ interface NoteCardProps {
 }
 
 export function NoteCard({ note, onNoteDelete }: NoteCardProps) {
-  const date = formatDistanceToNow(note.date, { locale: ptBR, addSuffix: true });
+  const date = formatDistanceToNow(note.date, { locale: enUS, addSuffix: true });
   const dateFormatted = date.charAt(0).toUpperCase() + date.slice(1);
 
   return (
     <Dialog.Root>
-      <Dialog.Trigger className="relative flex flex-col gap-4 p-5 border-2 border-transparent rounded-md bg-zinc-900 text-left overflow-hidden outline-none transition-all focus-visible:border-lime-400 hover:border-zinc-600">
-        <span className="text-sm font-medium text-zinc-300">{dateFormatted}</span>
+      <Dialog.Trigger className="relative flex flex-col gap-4 p-5 border-2 border-[#151515] rounded-lg bg-dark-gray text-left overflow-hidden outline-none transition-all focus-visible:border-white hover:bg-[#151515]">
+        <span className="text-sm font-medium text-white">{dateFormatted}</span>
 
-        <p className="text-sm leading-6 text-zinc-400">{note.content}</p>
+        <p className="leading-6 text-gray">{note.content}</p>
 
         <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-zinc-950 to-zinc-950/0 pointer-events-none" />
       </Dialog.Trigger>
 
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 bg-black/50" />
+        <Dialog.Overlay className="fixed inset-0 bg-black/50 backdrop-blur-sm" />
 
-        <Dialog.Content className="fixed inset-0 flex flex-col w-full overflow-hidden outline-none sm:inset-auto sm:left-1/2 sm:top-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 sm:max-w-[640px] sm:h-[60vh] bg-zinc-700 sm:rounded-md">
-          <Dialog.Close className="absolute top-0 right-0 p-1.5 bg-zinc-800 text-slate-400 hover:text-slate-100">
-            <X className="size-5" />
-          </Dialog.Close>
+        <Dialog.Content
+          className={clsx(
+            "fixed inset-0 flex flex-col w-full bg-dark-gray overflow-hidden outline-none",
+            "sm:inset-auto sm:left-1/2 sm:top-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 sm:max-w-[640px] sm:h-[60vh] sm:rounded-lg"
+          )}
+        >
+          <div className="flex flex-1 flex-col gap-6 p-5">
+            <div className="flex justify-between items-center">
+              <span className="text-xl font-medium text-white">{dateFormatted}</span>
 
-          <div className="flex flex-1 flex-col gap-3 p-5">
-            <span className="text-sm font-medium text-zinc-300">{dateFormatted}</span>
+              <Dialog.Close className="group p-1.5 rounded-full transition-all hover:bg-white">
+                <X className="size-5 stroke-white transition-all group-hover:stroke-black" />
+              </Dialog.Close>
+            </div>
 
-            <p className="text-sm leading-6 text-zinc-400">{note.content}</p>
+            <div className="flex flex-1 flex-col">
+              <p className="leading-6 text-white">{note.content}</p>
+            </div>
           </div>
 
           <button
             onClick={() => onNoteDelete(note.id)}
-            className="group w-full py-4 bg-zinc-800 text-center text-sm text-slate-300 font-medium outline-none"
+            className="w-full py-4 text-center text-sm text-white bg-red/80 font-medium outline-none transition-all hover:opacity-80"
           >
-            Deseja <span className="text-red-500 group-hover:underline">apagar essa nota</span>?
+            Delete note
           </button>
         </Dialog.Content>
       </Dialog.Portal>
