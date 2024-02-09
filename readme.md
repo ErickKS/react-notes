@@ -14,7 +14,7 @@
     <img src="./public/readme.gif" alt="project gif" height="400px"/>
     <h3 align="center">
         <strong>
-            <a href="https://cycle-x.vercel.app/">live demo</a>
+            <a href="https://react-take-notes-app.vercel.app">live demo</a>
         </strong>
     </h3>
 </div>
