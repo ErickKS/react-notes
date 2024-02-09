@@ -31,7 +31,7 @@ export function NewNoteCard({ onNoteCreated }: NewNoteCardProps) {
     const isSpeechRecognitionAPIAvailable = "SpeechRecognition" in window || "webkitSpeechRecognition" in window;
 
     if (!isSpeechRecognitionAPIAvailable) {
-      alert("infleizmente seu navegador não suporta a API de gravação!");
+      alert("Unfortunately your browser does not support the recording API!");
       return;
     }
 

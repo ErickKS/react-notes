@@ -15,6 +15,7 @@ export function Input({ ...props }: InputProps) {
         id="search"
         type="text"
         placeholder="Search notes"
+        autoComplete="off"
         onChange={props.onChange}
         className="w-full h-full bg-transparent text-lg text-white tracking-tight outline-none placeholder:text-gray"
       />

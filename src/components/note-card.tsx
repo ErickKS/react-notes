@@ -22,7 +22,7 @@ export function NoteCard({ note, onNoteDelete }: NoteCardProps) {
       <Dialog.Trigger className="relative flex flex-col gap-4 p-5 border-2 border-[#151515] rounded-lg bg-dark-gray text-left overflow-hidden outline-none transition-all focus-visible:border-white hover:bg-[#151515]">
         <span className="text-sm font-medium text-white">{dateFormatted}</span>
 
-        <p className="leading-6 text-gray">{note.content}</p>
+        <p className="leading-6 text-gray line-clamp-6">{note.content}</p>
 
         <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-zinc-950 to-zinc-950/0 pointer-events-none" />
       </Dialog.Trigger>
